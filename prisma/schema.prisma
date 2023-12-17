@@ -13,6 +13,8 @@ model User {
   email     String   @unique
   password  String
   expenses  Expense[]
+  budget   Float?    
+
 }
 
 model Category {
