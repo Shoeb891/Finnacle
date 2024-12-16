@@ -8,30 +8,28 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   username  String
-  email     String   @unique
+  email     String    @unique
   password  String
-  expenses  Expense[]
-  budget   Float?    
-
+  expenses  Expense[] // Relationship to expenses
+  budget    Float?    // Define user's budget
 }
 
 model Category {
-  id            Int        @id @default(autoincrement())
+  id            Int       @id @default(autoincrement())
   categoryName  String
-  expenses      Expense[]
+  expenses      Expense[] // Relationship to expenses
 }
 
 model Expense {
-  id               Int       @id @default(autoincrement())
+  id               Int        @id @default(autoincrement())
   expenseDate      DateTime
   description      String
   amount           Float
-  amountToInvest   Float    
-  user             User      @relation(fields: [userId], references: [id])
+  amountToInvest   Float
+  user             User       @relation(fields: [userId], references: [id])
   userId           Int
-  category         Category? @relation(fields: [categoryId], references: [id])
+  category         Category?  @relation(fields: [categoryId], references: [id])
   categoryId       Int?
-  @@index([id])
 }
